@@ -7,4 +7,4 @@ Some more complex than others, the tasks range from implementing a [calculator] 
 
   [Codewars]: www.codewars.com
   [pascals triangle]: https://github.com/TomShacham/katas/blob/master/lib/pascals_triangle.rb
-  [calculator]: 
+  [calculator]: https://github.com/TomShacham/katas/blob/master/lib/calculator.rb
