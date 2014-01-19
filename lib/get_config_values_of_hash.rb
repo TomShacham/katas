@@ -18,7 +18,7 @@ class Hash
   end
 end
 
-#bitches be trippin on fetch mixed with reduce
+# ppl like w00t using fetch mixed with reduce
 class Hash
   def get_value default, *args
     return default if args.empty?
