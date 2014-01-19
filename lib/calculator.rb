@@ -1,32 +1,21 @@
 class Calculator
-  def evaluate(string)
+  def parse(string)    
+    return string.to_i if string =~ /^\d+$/
+    right, left = string.reverse.split(/\+|\-/, 2)
+    right, left = string.reverse.split(/\/|\*/, 2) if left.nil?
+    left, right = left.reverse, right.reverse
+    {:left => parse(left), :right => parse(right), :op => string[left.size]}
+  end
 
+  def compute(tree)    
+    return tree unless tree.is_a? Hash
+    left, right, op = tree[:left], tree[:right], tree[:op]
+    compute(left).send(op.to_sym, compute(right))
+  end
+
+  def evaluate(string)
+    tree = parse(string.gsub(/\s/,''))    
+    puts tree
+    compute(tree)
   end
 end
-
-string = "2 + 2 + 1 - 1 - 1 + 3 * 4 - 5 * 5 / 2 / 4 - 6"
-
-def parse(string)
-  tree ||= {}
-  operator='\-'
-  looking_for = string[/\d* #{operator} \d*/]
-  return string if looking_for.nil?
-  left = string.slice(0..string.index(/#{operator}/)-2)
-  right = string.slice(string.index(/#{operator}/)+2..-1)
-  tree[:op]=operator[1].intern
-  tree[:left]=parse(left)
-  tree[:right]=parse(right)
-
-end
-
-p split_by_minus = parse(string)
-
-# p treeify split_by_minus
-string = "2 + 2 + 1 - 1 - 1 + 3 * 4 - 5 * 5 / 2 / 4 - 6"
-
-
-
-
-
-
-
